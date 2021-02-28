@@ -1,0 +1,119 @@
+<div class="modal fade" id="expenseCreateModal" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Create Client</h4>
+			</div>
+			<div class="modal-body">
+				<form action="/expense" method="POST" id="createExpenseForm">
+					<div class="form-group">
+						<label for="name">Client Name <span class="text-danger">*</span></label>
+						<select class="form-control" name="clientId">
+							<option th:each="client, iterator : ${clients}"
+								th:value="${client.id}" th:text="${client.name}"></option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="title">Title <span class="text-danger">*</span></label>
+						<input type="text" class="form-control" id="title"
+							placeholder="Enter expense title" name="title" required="required" />
+					</div>
+					<div class="form-group">
+						<label for="description">Description</label>
+						<input type="text" class="form-control" id="description"
+							placeholder="Enter expense description" name="description"/>
+					</div>
+					<div class="form-group">
+						<label for="currency">Currency</label>
+						<input type="text" class="form-control" id="currency"
+							placeholder="Enter expense currency" name="currency" required="required" />
+					</div>
+					<div class="form-group">
+						<label for="amount">Amount</label>
+						<input type="number" class="form-control" id="amount"
+							placeholder="Enter expense amount" name="amount" required="required" />
+					</div>
+					<div class="form-group">
+						<label for="timesStampOfExpense">Expense Time</label>
+						
+						<input type="date" class="form-control" id="timesStampOfExpense"
+							placeholder="Enter time of expense" name="timesStampOfExpense" required="required" />
+					</div>
+					<button type="button" class="btn btn-default" data-dismiss="modal" id="createExpense">Submit</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="expenseUpdateModal" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Update Expenses</h4>
+			</div>
+			<div class="modal-body">
+				<form action="/expense" method="POST" id="updateExpenseForm">
+					<div class="form-group">
+						<input type="hidden" id="update-id" name="id"/>
+						<label for="name">Client Name <span class="text-danger">*</span></label>
+						<select class="form-control" name="clientId" id="update-clientId">
+							<option th:each="client, iterator : ${clients}"
+								th:value="${client.id}" th:text="${client.name}"></option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="title">Title <span class="text-danger">*</span></label>
+						<input type="text" class="form-control" id="update-title"
+							placeholder="Enter expense title" name="title" required="required" />
+					</div>
+					<div class="form-group">
+						<label for="description">Description</label>
+						<input type="text" class="form-control" id="update-description"
+							placeholder="Enter expense description" name="description"/>
+					</div>
+					<div class="form-group">
+						<label for="currency">Currency</label>
+						<input type="text" class="form-control" id="update-currency"
+							placeholder="Enter expense currency" name="currency" required="required" />
+					</div>
+					<div class="form-group">
+						<label for="amount">Amount</label>
+						<input type="number" class="form-control" id="update-amount"
+							placeholder="Enter expense amount" name="amount" required="required" />
+					</div>
+					<div class="form-group">
+						<label for="timesStampOfExpense">Expense Time</label>
+						
+						<input type="date" class="form-control" id="update-timesStampOfExpense"
+							placeholder="Enter time of expense" name="timesStampOfExpense" required="required" />
+					</div>
+					<button type="button" class="btn btn-default" data-dismiss="modal" id="updateExpense">Submit</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="expenseDeleteModal" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Delete Client Confirmation</h4>
+			</div>
+			<div class="modal-body">
+				<form action="/expense" method="DELETE" id="deleteExpenseForm">
+					<input type="hidden" id="delete-id" name="id" />
+					<div class="form-group">
+						Do you want to delete <span class="text-danger" id="delete-title"></span>
+					</div>
+					<button type="button" class="btn btn-default" data-dismiss="modal" id="deleteExpense">Delete</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,25 @@
+spring:
+  devtools:
+        restart:
+            enabled: true
+               
+  datasource:
+    url: jdbc:mysql://localhost:3306/expense_db?useSSL=false
+    username: root
+    password: test#123
+    driver-class-name: com.mysql.jdbc.Driver
+  
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    
+  thymeleaf:
+    cache: false
+    encoding: UTF-8
+    prefix: /WEB-INF/views/
+    suffix: .html
+
+    
+server:
+  port: 4200

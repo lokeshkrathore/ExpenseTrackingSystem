@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Expense tracking system</title>
+<link rel="stylesheet"
+	th:href="@{/assets/plugins/bootstrap/css/bootstrap.min.css}"></link>
+<link rel="stylesheet" th:href="@{/resources/css/custom.css}"></link>
+</head>
+<body>
+	<div th:replace="@{/fragments/header}"></div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-7 col-sm-7 col-xs-7">
+				<span class="heading">Clients</span>
+			</div>
+			<div class="col-md-5 col-sm-5 col-xs-5">
+				<button type="button" class="btn btn-default pull-right"
+					data-toggle="modal" data-target="#clientCreateModal">+
+					Client</button>
+			</div>
+		</div>
+		<div class="alert alert-success alert-dismissible margin-top-25 hide"
+			id="success-alert">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			<strong>Success!</strong> <span id="success-alert-body"></span>
+		</div>
+		<div class="alert alert-danger alert-dismissible margin-top-25 hide"
+			id="danger-alert">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			<strong>Danger!</strong> <span id="danger-alert-body"></span>
+		</div>
+		<div class="row margin-top-25">
+			<div class="col-md-12">
+				<div class="table-responsive">
+					<table class="table table-hover table-bordered">
+						<thead>
+							<tr class="info">
+								<th>SR No.</th>
+								<th>Name</th>
+								<th>Active</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="client, iterator : ${clients}">
+								<td th:text="${iterator.count}"></td>
+								<td th:text="${client.name}"></td>
+								<td th:switch="${client.isActive}"><span th:case="true"
+									class="label label-sm label-success">True</span> <span
+									th:case="*" class="label label-sm label-danger">False</span></td>
+								<td><a class="btn btn-primary btn-xs"
+									th:href="'javascript:ClientFormValidation.updateModal(\'' + ${client.id} + '\',\'' 
+												+ ${client.name} + '\',\''
+												+ ${client.isActive} +'\');'">
+										<i class="glyphicon glyphicon-edit"></i> EDIT
+								</a> <a class="btn btn-danger btn-xs"
+									th:href="'javascript:ClientFormValidation.deleteModal(\'' + ${client.id} + '\',\'' 
+												+ ${client.name} +'\');'">
+										<i class="glyphicon glyphicon-trash"></i> DELETE
+								</a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<div th:replace="@{/fragments/modal/client_modal}"></div>
+<div th:replace="@{/fragments/footer}"></div>
+<script type="text/javascript" th:src="@{/resources/js/client.js}"></script>
+</html>

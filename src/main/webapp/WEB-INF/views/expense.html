@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Expense tracking system</title>
+<link rel="stylesheet"
+	th:href="@{/assets/plugins/bootstrap/css/bootstrap.min.css}"></link>
+<link rel="stylesheet" th:href="@{/resources/css/custom.css}"></link>
+</head>
+<body>
+	<div th:replace="fragments/header"></div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-7 col-sm-7 col-xs-7">
+				<span class="heading">Expenses</span>
+			</div>
+			<div class="col-md-5 col-sm-5 col-xs-5">
+				<button type="button" class="btn btn-default pull-right"
+					data-toggle="modal" data-target="#expenseCreateModal">+
+					Expense</button>
+			</div>
+		</div>
+		<div class="alert alert-success alert-dismissible margin-top-25 hide"
+			id="success-alert">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			<strong>Success!</strong> <span id="success-alert-body"></span>
+		</div>
+		<div class="alert alert-danger alert-dismissible margin-top-25 hide"
+			id="danger-alert">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			<strong>Danger!</strong> <span id="danger-alert-body"></span>
+		</div>
+		<div class="row margin-top-25">
+			<div class="col-md-12">
+				<div class="table-responsive">
+					<table class="table table-hover">
+						<thead>
+							<tr class="success">
+								<th>#</th>
+								<th>Title</th>
+								<th>Description</th>
+								<th>Currency</th>
+								<th>Amount</th>
+								<th>Expense Time</th>
+								<th>Client</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="expense, iterator : ${expenses}">
+								<td th:text="${iterator.count}"></td>
+								<td th:text="${expense.title}"></td>
+								<td th:text="${expense.description}"></td>
+								<td th:text="${expense.currency}"></td>
+								<td th:text="${expense.amount}"></td>
+								<td th:text="${expense.timesStampOfExpense}"></td>
+								<td th:text="${expense.client.name}"></td>
+								<td><a class="btn btn-primary btn-xs"
+									th:href="'javascript:ExpenseFormValidation.updateModal(\'' + ${expense.id} + '\',\'' 
+												+ ${expense.title} + '\',\''
+												+ ${expense.description} + '\',\''
+												+ ${expense.currency} + '\',\''
+												+ ${expense.amount} + '\',\''
+												+ ${expense.timesStampOfExpense} + '\',\''
+												+ ${expense.client.id} +'\');'">
+										<i class="glyphicon glyphicon-edit"></i> EDIT
+								</a> <a class="btn btn-danger btn-xs"
+									th:href="'javascript:ExpenseFormValidation.deleteModal(\'' + ${expense.id} + '\',\'' 
+												+ ${expense.title} +'\');'">
+										<i class="glyphicon glyphicon-trash"></i> DELETE
+								</a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<div th:replace="@{/fragments/modal/expense_modal}"></div>
+<div th:replace="fragments/footer"></div>
+<script type="text/javascript" th:src="@{/resources/js/expense.js}"></script>
+</html>

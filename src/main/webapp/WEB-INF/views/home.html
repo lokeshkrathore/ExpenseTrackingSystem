@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Expense tracking system</title>
+<link rel="stylesheet"
+	th:href="@{/assets/plugins/bootstrap/css/bootstrap.min.css}"></link>
+<link rel="stylesheet" th:href="@{/resources/css/custom.css}"></link>
+</head>
+<body>
+	<div th:replace="@{/fragments/header}"></div>
+	<div class="container">
+		<div class="jumbotron">
+			<h2 class="text-center">Expense Tracking System</h2>
+			<hr></hr>
+			<p>With the Expense Tracking System, Increase employee retention
+				with faster reimbursements and Don't waste time filing expense
+				reports.</p>
+		</div>
+	</div>
+</body>
+<div th:replace="@{/fragments/footer}"></div>
+
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		$("#home_menu").addClass("active");
+	});
+</script>
+</html>
